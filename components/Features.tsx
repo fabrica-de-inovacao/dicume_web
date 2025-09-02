@@ -97,10 +97,10 @@ const Features = () => {
                   <Image
                     src={
                       index === 0
-                        ? "/assets/asset_2.png"
+                        ? "/assets/asset_2.jpg"
                         : index === 1
-                        ? "/assets/asset_3.png"
-                        : "/assets/asset_4.jpg"
+                        ? "/assets/asset_3.svg"
+                        : "/assets/asset_4.svg"
                     }
                     alt={feature.title}
                     fill
@@ -110,7 +110,7 @@ const Features = () => {
                   />
                 </div>
                 {/* Elegant top overlay to improve text legibility over images */}
-                <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-white/85 via-white/40 to-transparent transition-opacity duration-300 group-hover:opacity-95"></div>
+                <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-white/60 via-white/20 to-transparent transition-opacity duration-300 group-hover:opacity-95"></div>
                 {/* Icon in top right corner */}
                 <div className="relative z-20 flex justify-end mb-4">
                   <div className="w-10 h-10 bg-black/90 rounded-full flex items-center justify-center">

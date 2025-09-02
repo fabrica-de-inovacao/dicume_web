@@ -3,18 +3,30 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
-import {
-  Person,
-  Phone,
-} from "react-bootstrap-icons";
+import { useState, useEffect } from "react";
+import { Person, Phone } from "react-bootstrap-icons";
 
 const Hero = () => {
-  // Avatar sources: read from /public/avatars (1.webp..8.webp), randomized per mount
-  const avatarFiles = ["1.webp","2.webp","3.webp","4.webp","5.webp","6.webp","7.webp","8.webp"];
-  const avatarSources = useMemo(() => {
+  // Avatar sources: read from /public/avatars (1.webp..8.webp).
+  // Keep deterministic order during SSR/hydration and shuffle only on client after mount.
+  const avatarFiles = [
+    "1.webp",
+    "2.webp",
+    "3.webp",
+    "4.webp",
+    "5.webp",
+    "6.webp",
+    "7.webp",
+    "8.webp",
+  ];
+  const [avatarSources, setAvatarSources] = useState<string[]>(() =>
+    avatarFiles.map((f) => `/avatars/${f}`)
+  );
+
+  useEffect(() => {
+    // Shuffle only on client after mount to avoid hydration mismatches
     const shuffled = [...avatarFiles].sort(() => Math.random() - 0.5);
-    return shuffled.map((f) => `/avatars/${f}`);
+    setAvatarSources(shuffled.map((f) => `/avatars/${f}`));
   }, []);
   // Radial positions around the mockup
   const avatarPositions = [
@@ -67,58 +79,57 @@ const Hero = () => {
       <div className="container-custom">
         <div className="text-center mx-auto">
           <div className="max-w-3xl mx-auto">
-          {/* Pre-title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center px-4 py-1.5 rounded-full border border-black/10 bg-white/80 backdrop-blur-sm text-sm font-medium text-text-primary shadow-sm mx-auto mb-3"
-          >
-            Transforme sua experiência
-          </motion.div>
+            {/* Pre-title */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="inline-flex items-center px-4 py-1.5 rounded-full border border-black/10 bg-white/80 backdrop-blur-sm text-sm font-medium text-text-primary shadow-sm mx-auto mb-3"
+            >
+              Transforme sua experiência
+            </motion.div>
 
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight mb-2"
-          >
-            Monte pratos mais saudáveis em{" "}
-            <span className="text-gradient">segundos</span>
-          </motion.h1>
+            {/* Main Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary leading-tight mb-2"
+            >
+              Monte pratos mais saudáveis em{" "}
+              <span className="text-gradient">segundos</span>
+            </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-lg text-text-secondary leading-relaxed mb-4 max-w-2xl mx-auto"
-          >
-            DICUMÊ te ajuda a entender cada alimento com um semáforo nutricional
-            simples. Busque, monte e salve suas refeições. Versão beta
-            disponível.
-          </motion.p>
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="text-lg text-text-secondary leading-relaxed mb-4 max-w-2xl mx-auto"
+            >
+              DICUMÊ te ajuda a entender cada alimento com um semáforo
+              nutricional simples. Busque, monte e salve suas refeições. Versão
+              beta disponível.
+            </motion.p>
 
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="flex justify-center mb-0"
-          >
-            <Link href="/experimentar">
-              <motion.button
-                className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 flex items-center space-x-3 shadow-soft card-hover"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Phone />
-                <span>Experimentar DICUMÊ</span>
-              </motion.button>
-            </Link>
-          </motion.div>
-
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="flex justify-center mb-0"
+            >
+              <Link href="/experimentar">
+                <motion.button
+                  className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-200 flex items-center space-x-3 shadow-soft card-hover"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Phone />
+                  <span>Experimentar DICUMÊ</span>
+                </motion.button>
+              </Link>
+            </motion.div>
           </div>
 
           {/* Phone Mockup - Centered */}
@@ -133,7 +144,9 @@ const Hero = () => {
               {avatarSources.map((src, idx) => (
                 <div
                   key={idx}
-                  className={`absolute ${avatarPositions[idx] ?? ""} animate-float transition-transform duration-300 group-hover:scale-105`}
+                  className={`absolute ${
+                    avatarPositions[idx] ?? ""
+                  } animate-float transition-transform duration-300 group-hover:scale-105`}
                   style={{ animationDelay: `${idx * 0.25}s` }}
                 >
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-white/70 shadow-md bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200">
@@ -171,7 +184,6 @@ const Hero = () => {
                 {/* Fade-to-section color (smoothly blends into next section bg) */}
                 <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-36 lg:h-48 bg-gradient-to-b from-transparent via-white/80 to-purple-50"></div>
               </div>
-
             </div>
           </motion.div>
         </div>

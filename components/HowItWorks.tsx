@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Search, Plus, Save, Share } from "lucide-react";
 import { Cup, House, Clipboard, People } from "react-bootstrap-icons";
 
@@ -123,95 +124,17 @@ const HowItWorks = () => {
                 transition: { duration: 0.3 },
               }}
             >
-              {/* Phone Mockup */}
-              <div className="relative w-64 h-[480px] bg-black rounded-[2rem] p-1.5 shadow-large">
-                <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
-                  {/* App Screen Content */}
-                  <div className="p-4 space-y-4">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-base">Meu Prato</h3>
-                      <div className="w-6 h-6 bg-primary rounded-full"></div>
-                    </div>
-
-                    {/* Plate Visualization */}
-                    <div className="bg-gray-100 rounded-lg p-3 h-24 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-success/20 rounded-full mx-auto mb-1.5 flex items-center justify-center">
-                          <Cup className="text-lg" />
-                        </div>
-                        <div className="text-xs text-text-secondary">
-                          Seu prato virtual
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Food Items */}
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">
-                        Itens adicionados
-                      </h4>
-                      <div className="space-y-1.5">
-                        <div className="flex items-center justify-between p-2 bg-success/10 rounded-md">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-3 h-3 bg-success rounded-full"></div>
-                            <span className="text-xs font-medium">
-                              Frango Grelhado
-                            </span>
-                          </div>
-                          <span className="text-xs text-text-secondary">
-                            150g
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-2 bg-warning/10 rounded-md">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-3 h-3 bg-warning rounded-full"></div>
-                            <span className="text-xs font-medium">
-                              Arroz Integral
-                            </span>
-                          </div>
-                          <span className="text-xs text-text-secondary">
-                            100g
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-2 bg-success/10 rounded-md">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-3 h-3 bg-success rounded-full"></div>
-                            <span className="text-xs font-medium">
-                              Brócolis
-                            </span>
-                          </div>
-                          <span className="text-xs text-text-secondary">
-                            80g
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Save Button */}
-                    <button className="w-full bg-primary text-white py-2.5 rounded-lg font-medium text-sm">
-                      Salvar Refeição
-                    </button>
-                  </div>
-
-                  {/* Bottom Navigation */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3">
-                    <div className="flex justify-around">
-                      <div className="text-gray-400">
-                        <House />
-                      </div>
-                      <div className="text-gray-400">
-                        <Search />
-                      </div>
-                      <div className="text-primary">
-                        <Clipboard />
-                      </div>
-                      <div className="text-gray-400">
-                        <People />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Real phone mockup image (place asset_5.webp into public/assets) */}
+              <div className="relative w-64 sm:w-72">
+                <Image
+                  src="/assets/asset_5.webp"
+                  alt="Mockup DICUMÊ - telefone"
+                  width={600}
+                  height={680}
+                  className="rounded-[2rem] shadow-large w-full h-auto"
+                  priority={false}
+                  style={{ objectFit: "cover" }}
+                />
               </div>
 
               {/* Demo Button */}
