@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import {
   Phone,
@@ -117,17 +116,103 @@ const FinalCTA = () => {
                   transition: { duration: 0.3 },
                 }}
               >
-                {/* Phone Mockup (real image) */}
-                <div className="relative w-64 h-[480px]">
-                  <Image
-                    src="/assets/asset_6.webp"
-                    alt="Mockup DICUMÊ no telefone"
-                    width={340}
-                    height={620}
-                    className="rounded-[2rem] object-cover shadow-large"
-                    priority={false}
-                  />
+                {/* Phone Mockup */}
+                <div className="relative w-64 h-[480px] bg-black rounded-[2rem] p-1.5 shadow-large">
+                  <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
+                    {/* App Screen Content */}
+                    <div className="p-4 space-y-4">
+                      {/* Header */}
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-bold text-base">DICUMÊ</h3>
+                        <div className="w-6 h-6 bg-primary rounded-full"></div>
+                      </div>
+
+                      {/* Success Message */}
+                      <div className="bg-success/10 rounded-lg p-3 text-center">
+                        <div className="w-10 h-10 bg-success rounded-full mx-auto mb-2 flex items-center justify-center">
+                          <span className="text-white text-lg">✓</span>
+                        </div>
+                        <h4 className="font-semibold text-success mb-1 text-sm">
+                          Prato Salvo!
+                        </h4>
+                        <p className="text-xs text-text-secondary">
+                          Sua refeição foi sincronizada
+                        </p>
+                      </div>
+
+                      {/* Recent Meals */}
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-sm">
+                          Refeições Recentes
+                        </h4>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center space-x-2 p-2 bg-gray-50 rounded-md">
+                            <div className="w-6 h-6 bg-success/20 rounded-full flex items-center justify-center">
+                              <Cup className="text-success text-xs" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="font-medium text-xs">
+                                Almoço Saudável
+                              </div>
+                              <div className="text-xs text-text-secondary">
+                                Hoje, 12:30
+                              </div>
+                            </div>
+                            <div className="flex space-x-0.5">
+                              <div className="w-1.5 h-1.5 bg-success rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-success rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-success rounded-full"></div>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2 p-2 bg-gray-50 rounded-md">
+                            <div className="w-6 h-6 bg-warning/20 rounded-full flex items-center justify-center">
+                              <Cup className="text-warning text-xs" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="font-medium text-xs">
+                                Café da Manhã
+                              </div>
+                              <div className="text-xs text-text-secondary">
+                                Hoje, 08:00
+                              </div>
+                            </div>
+                            <div className="flex space-x-0.5">
+                              <div className="w-1.5 h-1.5 bg-success rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-warning rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-success rounded-full"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Share Button */}
+                      <button className="w-full bg-secondary text-white py-2.5 rounded-lg font-medium text-sm">
+                        Compartilhar Progresso
+                      </button>
+                    </div>
+
+                    {/* Bottom Navigation */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3">
+                      <div className="flex justify-around">
+                        <div className="text-gray-400">
+                          <House />
+                        </div>
+                        <div className="text-gray-400">
+                          <Search />
+                        </div>
+                        <div className="text-primary">
+                          <Clipboard />
+                        </div>
+                        <div className="text-gray-400">
+                          <People />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Hand holding phone placeholder */}
+                <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-gray-200 rounded-full opacity-20"></div>
               </motion.div>
             </motion.div>
           </div>
