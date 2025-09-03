@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import {
   Android2,
   Download,
@@ -11,9 +10,30 @@ import {
   QrCode,
   InfoCircle,
 } from "react-bootstrap-icons";
+import dynamic from "next/dynamic";
+
+
+const QRCode = dynamic(() => import("react-qr-code"), { ssr: false });
 
 const APK_URL =
-  "https://github.com/mermas-digitais/mermas-game-platform/releases/download/release1/Game_GoM_2.3.apk";
+  process.env.NEXT_PUBLIC_APK_URL ??
+  "https://github.com/fabrica-de-inovacao/dicume_app/releases/download/release-beta-1.0.2/continue_a_instalacao_do_dicume_app.apk";
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DICUMÊ",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Android",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "BRL"
+  },
+  "downloadUrl": APK_URL,
+  "description": "App de nutrição inteligente com semáforo nutricional para Android"
+};
 
 export default function ExperimentarPage() {
   const [isAndroid, setIsAndroid] = useState(false);
@@ -25,7 +45,12 @@ export default function ExperimentarPage() {
   }, []);
 
   return (
-    <section className="pt-24 pb-16 lg:pt-28 lg:pb-24 bg-white">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <section className="pt-24 pb-16 lg:pt-28 lg:pb-24 bg-white">
       <div className="container-custom">
         <header className="mb-8">
           <motion.div
@@ -99,8 +124,22 @@ export default function ExperimentarPage() {
                  Substitua o bloco abaixo por um QR code real apontando para o APK_URL.
                  Tamanho recomendado: 256x256 em telas padrão, 320x320 em telas grandes.
               */}
-              <div className="w-64 h-64 max-w-full rounded-lg border border-dashed border-outline/60 bg-white/80 flex items-center justify-center text-text-secondary">
-                QR CODE PLACEHOLDER
+              <div className="w-64 h-64 max-w-full">
+                <div className="h-full w-full rounded-lg p-3 flex items-center justify-center bg-gradient-to-br from-white/80 to-gray-50 border border-outline/60 shadow-soft">
+                  {typeof window !== "undefined" ? (
+                    <div className="bg-white p-3 rounded-md shadow-sm flex items-center justify-center">
+                      <QRCode
+                        value={APK_URL}
+                        size={200}
+                        aria-label="QR code para baixar APK"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-text-secondary">
+                      Gerando QR code...
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -258,7 +297,8 @@ export default function ExperimentarPage() {
           pode remover a permissão de “Instalar apps desconhecidos” após
           concluir.
         </div>
-      </div>
+      </div> 
     </section>
-  );
-}
+  </>
+);
+} 
