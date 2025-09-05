@@ -64,10 +64,13 @@ export const metadata: Metadata = {
       "App de nutrição inteligente com semáforo nutricional. Versão beta disponível para Android.",
     images: [
       {
-        url: "/banner.png",
+        url: `${
+          process.env.NEXT_PUBLIC_SITE_URL || "https://dicume.app.br"
+        }/banner.png`,
         width: 1200,
         height: 630,
         alt: "DICUMÊ - App de nutrição inteligente",
+        type: "image/png",
       },
     ],
   },
@@ -76,7 +79,11 @@ export const metadata: Metadata = {
     title: "DICUMÊ - Monte pratos mais saudáveis em segundos",
     description:
       "App de nutrição inteligente com semáforo nutricional. Versão beta disponível para Android.",
-    images: ["/banner.png"],
+    images: [
+      `${
+        process.env.NEXT_PUBLIC_SITE_URL || "https://dicume.app.br"
+      }/banner.png`,
+    ],
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
